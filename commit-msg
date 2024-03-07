@@ -1,0 +1,22 @@
+COMMIT_MESSAGE_FILE=$1
+
+YELLOW="\033[1;33m"
+CLEAR="\033[0m"
+GREY="\033[0;37m"
+
+if ! grep -q "docs:\|build:\|refactor:\|chore:\|test:\|ci:\|feat:\|fix:\|style:" $COMMIT_MESSAGE_FILE; then
+	echo "\033[0;31mAborting commit. Your commit message is missing a conventional commit type. \033[0m"
+	echo "
+${GREY}use${CLEAR} '${YELLOW}docs:${CLEAR}' for documentation changes such as README updates.
+${GREY}use${CLEAR} '${YELLOW}build:${CLEAR}' for changes that affect the build system or external dependencies
+${GREY}use${CLEAR} '${YELLOW}refactor:${CLEAR}' for changes that refactor code but do not affect the code functionality
+${GREY}use${CLEAR} '${YELLOW}chore:${CLEAR}' updates to the build system, configurations or external dependencies (without a code change)
+${GREY}use${CLEAR} '${YELLOW}test:${CLEAR}' for changes that affect tests, such as new tests, changes to existing tests or removal of existing tests
+${GREY}use${CLEAR} '${YELLOW}ci:${CLEAR}' for changes to CI configuration
+${GREY}use${CLEAR} '${YELLOW}feat:${CLEAR}' for addition of new features
+${GREY}use${CLEAR} '${YELLOW}fix:${CLEAR}' for bug fixes in the code
+${GREY}use${CLEAR} '${YELLOW}style:${CLEAR}' for changes that affect the formatting of the code, such as spaces, punctuation, links, etc.
+"
+	exit 1
+fi
+
